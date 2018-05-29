@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 $pwd = $PSScriptRoot
 
 # Import the vSphere connect module from the scripts directory
-Import-Module $pwd\..\modules\vSphere_Connect
+Import-Module $pwd\..\modules\vSphereConnect
 
 # First, get a list of servers you are connected to
 $serverlist = $global:DefaultVIServer

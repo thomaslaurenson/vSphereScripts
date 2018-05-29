@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 $pwd = $PSScriptRoot
 
 # Import the vSphere connect module from the scripts directory
-Import-Module $pwd\..\modules\vSphere_Connect
+Import-Module $pwd\..\modules\vSphereConnect
 
 # Import the vSphere connect module from the scripts directory
 Import-Module $pwd\..\modules\SimplePing
