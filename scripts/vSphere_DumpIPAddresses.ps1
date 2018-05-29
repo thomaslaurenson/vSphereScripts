@@ -59,19 +59,21 @@ $vms = Get-VM -Name $input_name
 # Sort the VM by alphabetical order
 $sorted_vms = $vms | Sort-Object 
 
+# Define a hashtable to hold name, IP information
+$IPAddresses = @{}
+
 # Process the array of discovered VMs
-Write-Host ">>> Pinging VMs:"
+Write-Host ">>> Processing VMs:"
 ForEach ($vm in $sorted_vms) {
     # Get the VM name
     $VMName = $vm.Name
     # Gets the first IP address of the VM (usually the IP4 address)
     $VMIP4 = $vm.Guest.IPAddress[0]
-    # Get the VM Owner
-    $VMOwner = $vm.CustomFields["VRM Owner"]
     
-    # Print the details of the VM
-    Write-Host ">>> VM details:" 
-    Write-Host "  > VN Name: ${VMName}"
-    Write-Host "  > VRA Owner: ${VMOwner}"
-    Write-Host "  > VN IPv4 Address: ${VMIP4}"      
+    # Populate IPAddresses hashtable
+    $IPAddresses.Add(${VMName}, ${VMIP4})     
 }
+
+# Export hashtable to CSV
+# Sort the hashtable first, then only export key and value
+$IPAddresses.GetEnumerator() | sort -Property name | Select-Object -Property Key,Value | Export-Csv -Path $pwd\IPaddresses.csv -NoTypeInformation
