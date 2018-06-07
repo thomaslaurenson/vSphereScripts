@@ -96,8 +96,6 @@ foreach($vm in $sorted_vms){
     $VMName = $vm.Name
     # Gets the first IP address of the VM (usually the IP4 address)
     $VMIP4 = $vm.Guest.IPAddress[0]
-    # Get the VM Owner
-    $VMOwner = $vm.CustomFields["VRM Owner"]
 
     Write-Host ">>> Processing VM: $VMName"
     Write-Host "  > IP address: $VMIP4"
@@ -105,7 +103,7 @@ foreach($vm in $sorted_vms){
     # Form a command for executing plink.exe
     # echo y: This auto replies yes to unknown SSH keys
     # Then plink to port, username, password, IP and execute command
-    echo y | plink -P $sshPort -l $username -pw $password $TargetIP $CommandExit
+    Invoke-Expression -Command "echo y | $plinkCmd -P $sshPort -l $username -pw $password $VMIP4 $CommandExit"
     
     # Check the exit code
     if ( $LastExitCode -ne 0 )

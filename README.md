@@ -43,7 +43,7 @@ If you wish to upgrade the PowerCLI version, you need to run the same command, b
 
 `Install-Module -Name VMware.PowerCLI -Force`
 
-# Allowing PowerShell Scripts to Run
+## Allowing PowerShell Scripts to Run
 
 A good security feature added by Microsoft is stopping PowerShell scripts the ability to run by default. Since we need to run scripts, we have to enable this setting. This can be achieved with the following command:
 
