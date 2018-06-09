@@ -1,0 +1,1 @@
+echo "mypassword" | sudo -S bash /tmp/script.sh
