@@ -99,8 +99,8 @@ $targetFolder = "/tmp/"
 $scriptHelperDirectory = "$pwd/SSHExecuteScriptHelpers/"
 
 # The script to run on the target VM
-# This code expects 'marking_script.sh' to be in the same folder as the script
-$scriptToRun = "$scriptHelperDirectory/marking_script.sh" 
+# This code expects 'script.sh' to be in the same folder as the script
+$scriptToRun = "$scriptHelperDirectory/script.sh" 
 
 # The base output folder to contain
 # 1) Logs (stdout, stderr)
