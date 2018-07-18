@@ -41,8 +41,8 @@ Write-Host ">>> Attempting to connect now..."
 $bearer_token = vRealizeConnect($vra_server)
 Write-Host "  > Continuing..."
 
-# Update URI to request Entitled Catalog Items
-$uri = $vra_server + "catalog-service/api/consumer/entitledCatalogItemViews"
+# Update URI to request available resources
+$uri = $vra_server + "catalog-service/api/consumer/resources/?page=1&limit=5000&$orderby=name"
 
 Write-Host ">>> Current URI:" $uri
 
