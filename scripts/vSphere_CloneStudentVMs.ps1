@@ -49,6 +49,15 @@ $csvFile = $pwd + "/IMPORT-FILE.csv"
 # Import the CSV file
 $studentUsers = Import-Csv -Path $csvFile
 
+Write-Host ">>> You are about to create VMs the following users:"
+Foreach ($user in $studentUsers) {
+    Write-Host "  >"$user.USERNAME
+}
+$total_vm_count = $studentUsers.Length
+Write-Host ">>> There are $total_vm_count VMs.`n"
+
+Read-Host -Prompt ">>> Press any key to continue or CTRL+C to quit" 
+
 # Pull template from vSphere, used for every VM
 $VMTemplate = Get-Template -Name 'VM-TEMPLATE'
 
