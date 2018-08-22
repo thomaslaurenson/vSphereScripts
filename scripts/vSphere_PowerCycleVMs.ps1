@@ -59,7 +59,18 @@ $vms = Get-VM -Name $input_name
 # Sort the VM by alphabetical order
 $sorted_vms = $vms | Sort-Object
 
-########### VM PROCESSING CHECK
+########### PRINT TARGET VMS AND CHECK WITH USER
+
+Write-Host ">>> You are about to PowerOn the following VMs:"
+Foreach ($vm in $sorted_vms) {
+    Write-Host "  >" $vm.name
+}
+$total_vm_count = $sorted_vms.Length
+Write-Host ">>> There are $total_vm_count VMs.`n"
+
+Read-Host -Prompt ">>> Press any key to continue or CTRL+C to quit" 
+
+########### START ACTUAL VM PROCESSING
 
 # Display a list of all VMs to the user
 Write-Host ">>> You are about to process the following machines:"
