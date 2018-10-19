@@ -69,6 +69,25 @@ Foreach ($vpg in $sorted_vpgs) {
 
     $vpgName = $vpg.Name
 
-    Get-VDPortgroup -Name $vpgName | Get-VDSecurityPolicy | Set-VDSecurityPolicy -AllowPromiscuous $true
-    Get-VDPortgroup -Name $vpgName | Get-VDSecurityPolicy | Set-VDSecurityPolicy -ForgedTransmits $true
+    $vdpg = Get-VDPortgroup -Name $vpgName | Get-VDSecurityPolicy
+
+    if (!$vdpg.AllowPromiscuous)
+    {
+        Write-Host "  > Property: AllowPromiscuous... Enabling"
+        Get-VDPortgroup -Name $vpgName | Get-VDSecurityPolicy | Set-VDSecurityPolicy -AllowPromiscuous $true | Out-Null
+    }
+    else
+    {
+        Write-Host "  > Property: AllowPromiscuous... Already enabled"
+    }
+
+    if (!$vdpg.ForgedTransmits)
+    {
+        Write-Host "  > Property: ForgedTransmits... Enabling"
+        Get-VDPortgroup -Name $vpgName | Get-VDSecurityPolicy | Set-VDSecurityPolicy -ForgedTransmits $true | Out-Null
+    }
+    else
+    {
+        Write-Host "  > Property: ForgedTransmits... Already enabled"
+    }
 }
