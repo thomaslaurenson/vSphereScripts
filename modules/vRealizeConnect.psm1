@@ -2,7 +2,7 @@
 Author:  Thomas Laurenson
 Email:   thomas@thomaslaurenson.com
 Website: thomaslaurenson.com
-Date:    2018/07/18
+Date:    2018/11/01
 Description:
 vRealizeConnect.psm1 is module to connect to the REST API of a vRealize server.
 The module should return the Bearer ID to be used in subsequent API use.
@@ -24,14 +24,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #>
 
 function vRealizeConnect($vra_server) {
-    # Check that there is a supplied vRealzie hostname
+    # Check that there is a supplied vRealize hostname
     if ([string]::IsNullOrEmpty($vra_server))
     {
         Write-Host ">>> ERROR: No vRealize hostname configured..."
-        Write-Host "  > You must enter a valid vRealize hostname in modules/vRealizeConnect.psm1 file"
+        Write-Host "  > You must pass a valid vRealize hostname to vRealizeConnect.psm1"
         Write-Host "  > Exiting."
         exit
     }
+
+    # Append forward slash if vRealize hostname does not end with a forward slash
+    if (-Not $vra_server.endswith("/")) {
+        $vra_server = $vra_server + "/"
+    }
+    
     Write-Host "  > vRealize address:" $vra_server
 
     # Get user input for username and password
