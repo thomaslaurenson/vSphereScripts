@@ -68,10 +68,10 @@ $search_term = Read-Host -Prompt '>>> Please input the search term'
 Write-Host "  > Search term:" $search_term
 if (-Not $search_term.endswith("*")) {
     $search_term = $search_term + "*"
-}
+    }
 if (-Not $search_term.startswith("*")) {
     $search_term = "*" + $search_term
-}
+    }
 Write-Host "  > Search term:" $search_term
 
 # Loop through the array of entitled items
@@ -114,13 +114,20 @@ ForEach ($deployment in $response.content) {
                 # Get the ID of the Destory action
                 $deployment_destroy_id = $deployment_action.id
                 Write-Host "  > Destroy action id:" $deployment_destroy_id
-                                # Fetch the Destroy template                $uri = $vra_server + "catalog-service/api/consumer/resources/" `                                    + $deployment_id `                                    + "/actions/" `
+                
+                # Fetch the Destroy template
+                $uri = $vra_server + "catalog-service/api/consumer/resources/" `
+                                    + $deployment_id `
+                                    + "/actions/" `
                                     + $deployment_destroy_id `
                                     + "/requests/template"
                 $data = Invoke-RestMethod -Method Get -Uri $uri -Headers $header
                 $data_json = $data | ConvertTo-Json
 
-                # The previous response contains the data needed to send to invoke a destroy action                $uri = $vra_server + "catalog-service/api/consumer/resources/" `                                    + $deployment_id `                                    + "/actions/" `
+                # The previous response contains the data needed to send to invoke a destroy action
+                $uri = $vra_server + "catalog-service/api/consumer/resources/" `
+                + $deployment_id `
+                                    + "/actions/" `
                                     + $deployment_destroy_id `
                                     + "/requests"
                 $response = Invoke-RestMethod -Method Post -Uri $uri -Headers $header -Body $data_json -ContentType "application/json"
