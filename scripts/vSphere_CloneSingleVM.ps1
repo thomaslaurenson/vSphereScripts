@@ -2,13 +2,13 @@
 Author:  Thomas Laurenson
 Email:   thomas@thomaslaurenson.com
 Website: thomaslaurenson.com
-Date:    2018/08/17
+Date:    2019/04/10
 Description:
 A simple PowerShell script to clone a specific virtual machine for a
 complete class of students. Good for single virtual machine assessments.
 Takes a CSV as input with one student username per line.
 
-Copyright (c) 2018, Thomas Laurenson
+Copyright (c) 2019, Thomas Laurenson
 ###############################################################################
 This file is part of vSphereScripts.
 vSphereScripts is free software: you can redistribute it and/or modify
@@ -62,8 +62,8 @@ Read-Host -Prompt ">>> Press any key to continue or CTRL+C to quit"
 $VMTemplate = Get-Template -Name 'VM-TEMPLATE'
 
 # Set vSphere variables
-$VMHost = 'VSPHERE-HOST'
-$Datastore = 'DATASTORE-NAME'
+$VMHost = 'VSPHERE-HOST'       # Domain name/IP of the host (find in vSphere > Hosts and Clusters)
+$Datastore = 'DATASTORE-NAME'  # Name of the datastore (find in vSphere > Storage)
 
 ForEach ($user in $studentUsers)
 {

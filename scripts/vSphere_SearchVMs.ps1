@@ -2,12 +2,12 @@
 Author:  Thomas Laurenson
 Email:   thomas@thomaslaurenson.com
 Website: thomaslaurenson.com
-Date:    2018/05/11
+Date:    2019/04/10
 Description:
 A simple PowerShell script to search vSphere for VMs with a specific
 name, then print out properties of the VM.
 
-Copyright (c) 2018, Thomas Laurenson
+Copyright (c) 2019, Thomas Laurenson
 ###############################################################################
 This file is part of vSphereScripts.
 vSphereScripts is free software: you can redistribute it and/or modify
@@ -60,18 +60,8 @@ $vms = Get-VM -Name $input_name
 $sorted_vms = $vms | Sort-Object 
 
 # Process the array of discovered VMs
-Write-Host ">>> Pinging VMs:"
+Write-Host ">>> Search reuslts:\n"
 ForEach ($vm in $sorted_vms) {
-    # Get the VM name
-    $VMName = $vm.Name
-    # Gets the first IP address of the VM (usually the IP4 address)
-    $VMIP4 = $vm.Guest.IPAddress[0]
-    # Get the VM Owner
-    $VMOwner = $vm.CustomFields["VRM Owner"]
-    
-    # Print the details of the VM
-    Write-Host ">>> VM details:" 
-    Write-Host "  > VN Name: ${VMName}"
-    Write-Host "  > VRA Owner: ${VMOwner}"
-    Write-Host "  > VN IPv4 Address: ${VMIP4}"      
+    # Print the name of the VM  
+    Write-Host $vm.Name
 }
