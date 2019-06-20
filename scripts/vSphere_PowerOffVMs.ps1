@@ -72,16 +72,6 @@ Read-Host -Prompt ">>> Press any key to continue or CTRL+C to quit"
 
 ########### START ACTUAL VM PROCESSING
 
-# Display a list of all VMs to the user
-Write-Host ">>> You are about to process the following machines:"
-Foreach ($vm in $sorted_vms) {
-    Write-Host "  >"$vm.CustomFields["VRM Owner"] $vm.Name
-}
-$total_vm_count = $sorted_vms.Length
-Write-Host ">>> There are $total_vm_count VMs.`n"
-
-Read-Host -Prompt ">>> Press any key to continue or CTRL+C to quit" 
-
 # Loop each of the found VMs
 Foreach ($vm in $sorted_vms) {
     
